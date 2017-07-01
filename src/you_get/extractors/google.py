@@ -2,9 +2,10 @@
 
 __all__ = ['google_download']
 
-from ..common import *
-
 import re
+
+from common import *
+
 
 # YouTube media encoding options, in descending quality order.
 # taken from http://en.wikipedia.org/wiki/YouTube#Quality_and_codecs, 3/22/2013.
@@ -81,7 +82,7 @@ def google_download(url, output_dir = '.', merge = True, info_only = False, **kw
             title = r1(r'<title[^>]*>([^<\n]+)', post_html)
 
             if title is None:
-                response = request.urlopen(request.Request(real_url))
+                response = request.urlopen(request.Request("real_url"))
                 if response.headers['content-disposition']:
                     filename = parse.unquote(r1(r'filename="?(.+)"?', response.headers['content-disposition'])).split('.')
                     title = ''.join(filename[:-1])

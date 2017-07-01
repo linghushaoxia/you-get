@@ -2,11 +2,12 @@
 
 __all__ = ['sina_download', 'sina_download_by_vid', 'sina_download_by_vkey']
 
-from ..common import *
-
 from hashlib import md5
 from random import randint
 from time import time
+
+from common import *
+
 
 def get_k(vid, rand):
     t = str(int('{0:b}'.format(int(time()))[:-6], 2))

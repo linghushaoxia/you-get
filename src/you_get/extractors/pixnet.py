@@ -2,11 +2,13 @@
 
 __all__ = ['pixnet_download']
 
-from ..common import *
-import urllib.error
-from time import time
-from urllib.parse import quote
 from json import loads
+from time import time
+import urllib.error
+from urllib.parse import quote
+
+from common import *
+
 
 def pixnet_download(url, output_dir = '.', merge = True, info_only = False, **kwargs):
     if re.match(r'http://(\w)+.pixnet.net/album/video/(\d)+', url):

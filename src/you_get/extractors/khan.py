@@ -2,7 +2,7 @@
 
 __all__ = ['khan_download']
 
-from ..common import *
+from common import *
 from .youtube import YouTube
 
 def khan_download(url, output_dir='.', merge=True, info_only=False, **kwargs):

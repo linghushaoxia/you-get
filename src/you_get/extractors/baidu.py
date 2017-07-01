@@ -3,7 +3,7 @@
 
 __all__ = ['baidu_download']
 
-from ..common import *
+from common import *
 from .embed import *
 from .universal import *
 

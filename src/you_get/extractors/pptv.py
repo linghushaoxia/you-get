@@ -2,12 +2,12 @@
 
 __all__ = ['pptv_download', 'pptv_download_by_id']
 
-from ..common import *
-
+from random import random
 import re
 import time
 import urllib
-from random import random
+
+from common import *
 
 
 def constructKey(arg):

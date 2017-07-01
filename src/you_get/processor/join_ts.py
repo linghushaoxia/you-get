@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-import struct
 from io import BytesIO
+import struct
+
 
 ##################################################
 # main
 ##################################################
-
 def guess_output(inputs):
     import os.path
     inputs = map(os.path.basename, inputs)

@@ -2,14 +2,14 @@
 
 __all__ = ['bilibili_download']
 
-from ..common import *
+import hashlib
+import re
 
+from common import *
 from .sina import sina_download_by_vid
 from .tudou import tudou_download_by_id
 from .youku import youku_download_by_vid
 
-import hashlib
-import re
 
 appkey = 'f3bb208b3d081dc8'
 SECRETKEY_MINILOADER = '1c15888dc316e05a15fdd0a02ed6584f'

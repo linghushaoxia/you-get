@@ -2,11 +2,12 @@
 
 __all__ = ['tumblr_download']
 
-from ..common import *
-from .universal import *
+from common import *
 from .dailymotion import dailymotion_download
+from .universal import *
 from .vimeo import vimeo_download
 from .vine import vine_download
+
 
 def tumblr_download(url, output_dir='.', merge=True, info_only=False, **kwargs):
     if re.match(r'https?://\d+\.media\.tumblr\.com/', url):

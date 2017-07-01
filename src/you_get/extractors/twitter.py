@@ -2,8 +2,9 @@
 
 __all__ = ['twitter_download']
 
-from ..common import *
+from common import *
 from .vine import vine_download
+
 
 def extract_m3u(source):
     r1 = get_content(source)

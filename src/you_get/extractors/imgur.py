@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-from ..common import *
-from ..extractor import VideoExtractor
-from .universal import *
+from common import *
+from extractor import VideoExtractor
 
+
+#from universal import *
 class Imgur(VideoExtractor):
     name = "Imgur"
 

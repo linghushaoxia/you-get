@@ -2,7 +2,9 @@
 
 __all__ = ['naver_download']
 import urllib.request, urllib.parse
-from ..common import *
+
+from common import *
+
 
 def naver_download(url, output_dir = '.', merge = True, info_only = False, **kwargs):
 

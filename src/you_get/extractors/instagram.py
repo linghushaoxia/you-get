@@ -2,7 +2,8 @@
 
 __all__ = ['instagram_download']
 
-from ..common import *
+from common import *
+
 
 def instagram_download(url, output_dir='.', merge=True, info_only=False, **kwargs):
     html = get_html(url)

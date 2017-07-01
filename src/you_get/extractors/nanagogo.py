@@ -2,8 +2,9 @@
 
 __all__ = ['nanagogo_download']
 
-from ..common import *
+from common import *
 from .universal import *
+
 
 def nanagogo_download(url, output_dir='.', merge=True, info_only=False, **kwargs):
     if re.match(r'https?://stat.7gogo.jp', url):

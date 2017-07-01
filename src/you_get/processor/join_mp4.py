@@ -6,8 +6,9 @@
 # reader and writer
 ##################################################
 
-import struct
 from io import BytesIO
+import struct
+
 
 def skip(stream, n):
     stream.seek(stream.tell() + n)

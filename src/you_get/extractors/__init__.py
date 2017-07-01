@@ -33,6 +33,7 @@ from .interest import *
 from .iqilu import *
 from .iqiyi import *
 from .joy import *
+from .khan import *
 from .ku6 import *
 from .kugou import *
 from .kuwo import *
@@ -61,6 +62,7 @@ from .sina import *
 from .sohu import *
 from .soundcloud import *
 from .suntv import *
+from .ted import *
 from .theplatform import *
 from .tucao import *
 from .tudou import *
@@ -79,6 +81,6 @@ from .yinyuetai import *
 from .yixia import *
 from .youku import *
 from .youtube import *
-from .ted import *
-from .khan import *
 from .zhanqi import *
+
+

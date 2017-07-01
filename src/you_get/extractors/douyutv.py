@@ -2,10 +2,12 @@
 
 __all__ = ['douyutv_download']
 
-from ..common import *
-import json
 import hashlib
+import json
 import time
+
+from common import *
+
 
 def douyutv_download(url, output_dir = '.', merge = True, info_only = False, **kwargs):
     html = get_content(url)

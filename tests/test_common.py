@@ -4,6 +4,7 @@ import unittest
 
 from you_get.common import *
 
+
 class TestCommon(unittest.TestCase):
     
     def test_match1(self):

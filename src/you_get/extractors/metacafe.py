@@ -2,9 +2,11 @@
 
 __all__ = ['metacafe_download']
 
-from ..common import *
 import urllib.error
 from urllib.parse import unquote
+
+from common import *
+
 
 def metacafe_download(url, output_dir = '.', merge = True, info_only = False, **kwargs):
     if re.match(r'http://www.metacafe.com/watch/\w+', url):

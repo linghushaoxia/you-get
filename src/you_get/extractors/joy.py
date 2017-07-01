@@ -2,7 +2,8 @@
 
 __all__ = ['joy_download']
 
-from ..common import *
+from common import *
+
 
 def video_info(channel_id, program_id, volumn_id):
     url = 'http://msx.app.joy.cn/service.php'

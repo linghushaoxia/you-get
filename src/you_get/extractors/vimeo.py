@@ -2,8 +2,11 @@
 
 __all__ = ['vimeo_download', 'vimeo_download_by_id', 'vimeo_download_by_channel', 'vimeo_download_by_channel_id']
 
-from ..common import *
 from json import loads
+
+from common import *
+
+
 access_token = 'f6785418277b72c7c87d3132c79eec24'  #By Beining
 
 #----------------------------------------------------------------------

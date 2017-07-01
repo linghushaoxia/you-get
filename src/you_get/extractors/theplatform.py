@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-from ..common import *
+from common import *
+
 
 def theplatform_download_by_pid(pid, title, output_dir='.', merge=True, info_only=False, **kwargs):
     smil_url = "http://link.theplatform.com/s/dJ5BDC/%s/meta.smil?format=smil&mbr=true" % pid

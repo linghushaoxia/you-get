@@ -6,9 +6,12 @@
 
 __all__ = ['ckplayer_download']
 
-from xml.etree import cElementTree as ET
 from copy import copy
-from ..common import *
+from xml.etree import cElementTree as ET
+
+from common import *
+
+
 #----------------------------------------------------------------------
 def ckplayer_get_info_by_xml(ckinfo):
     """str->dict

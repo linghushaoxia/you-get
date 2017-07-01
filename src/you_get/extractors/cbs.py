@@ -2,9 +2,9 @@
 
 __all__ = ['cbs_download']
 
-from ..common import *
-
+from common import *
 from .theplatform import theplatform_download_by_pid
+
 
 def cbs_download(url, output_dir='.', merge=True, info_only=False, **kwargs):
     """Downloads CBS videos by URL.

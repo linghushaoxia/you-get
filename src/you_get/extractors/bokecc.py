@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
-from ..common import *
-from ..extractor import VideoExtractor
+from common import *
+from extractor import VideoExtractor
 import xml.etree.ElementTree as ET
+
 
 class BokeCC(VideoExtractor):
     name = "BokeCC"
@@ -52,7 +53,7 @@ class BokeCC(VideoExtractor):
             raise 
 
         if title is None:
-            self.title = '_'.join([i.text for i in tree.iterfind('video/videomarks/videomark/markdesc')])
+            self.title = '_'.join([i.text for i in self.tree.iterfind('video/videomarks/videomark/markdesc')])
         else:
             self.title = title
 

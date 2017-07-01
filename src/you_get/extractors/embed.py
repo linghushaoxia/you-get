@@ -1,8 +1,11 @@
 __all__ = ['embed_download']
 
-from ..common import *
+"""
+refer to http://open.youku.com/tools
+"""
 
 from .bilibili import bilibili_download
+from common import *
 from .iqiyi import iqiyi_download_by_vid
 from .le import letvcloud_download_by_vu
 from .netease import netease_download
@@ -13,9 +16,7 @@ from .vimeo import vimeo_download_by_id
 from .yinyuetai import yinyuetai_download_by_id
 from .youku import youku_download_by_vid
 
-"""
-refer to http://open.youku.com/tools
-"""
+
 youku_embed_patterns = [ 'youku\.com/v_show/id_([a-zA-Z0-9=]+)',
                          'player\.youku\.com/player\.php/sid/([a-zA-Z0-9=]+)/v\.swf',
                          'loader\.swf\?VideoIDS=([a-zA-Z0-9=]+)',

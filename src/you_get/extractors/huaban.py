@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 
 import json
+import math
 import os
 import re
-import math
 import traceback
+
+from common import *
 import urllib.parse as urlparse
 
-from ..common import *
 
 __all__ = ['huaban_download']
 

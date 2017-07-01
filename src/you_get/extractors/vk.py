@@ -2,7 +2,7 @@
 
 __all__ = ['vk_download']
 
-from ..common import *
+from common import *
 
 
 def get_video_info(url):

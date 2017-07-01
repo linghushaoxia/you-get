@@ -1,5 +1,32 @@
 #!/usr/bin/env python
+import getopt
+from http import cookiejar
+from importlib import import_module
+import json
+import locale
+import logging
+import os
+import platform
+import re
+import socket
+import sys
+import time
+from urllib import request, parse, error
 
+from util import log, term
+from util.git import get_version
+from util.strings import get_filename, unescape_html
+from version import __version__
+
+
+import json_output as json_output_
+dry_run = False
+json_output = False
+force = False
+player = None
+extractor_proxy = None
+cookies = None
+output_filename = None
 SITES = {
     '163'              : 'netease',
     '56'               : 'w56',
@@ -96,35 +123,6 @@ SITES = {
     'youtube'          : 'youtube',
     'zhanqi'           : 'zhanqi',
 }
-
-import getopt
-import json
-import locale
-import logging
-import os
-import platform
-import re
-import socket
-import sys
-import time
-from urllib import request, parse, error
-from http import cookiejar
-from importlib import import_module
-
-from .version import __version__
-from .util import log, term
-from .util.git import get_version
-from .util.strings import get_filename, unescape_html
-from . import json_output as json_output_
-
-dry_run = False
-json_output = False
-force = False
-player = None
-extractor_proxy = None
-cookies = None
-output_filename = None
-
 fake_headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Charset': 'UTF-8,*;q=0.5',
@@ -743,7 +741,7 @@ def get_output_filename(urls, title, ext, output_dir, merge):
 
     merged_ext = ext
     if (len(urls) > 1) and merge:
-        from .processor.ffmpeg import has_ffmpeg_installed
+        from processor.ffmpeg import has_ffmpeg_installed
         if ext in ['flv', 'f4v']:
             if has_ffmpeg_installed():
                 merged_ext = 'mp4'
@@ -816,9 +814,9 @@ def download_urls(urls, title, ext, total_size, output_dir='.', refer=None, merg
             return
 
         if 'av' in kwargs and kwargs['av']:
-            from .processor.ffmpeg import has_ffmpeg_installed
+            from processor.ffmpeg import has_ffmpeg_installed
             if has_ffmpeg_installed():
-                from .processor.ffmpeg import ffmpeg_concat_av
+                from processor.ffmpeg import ffmpeg_concat_av
                 ret = ffmpeg_concat_av(parts, output_filepath, ext)
                 print('Merged into %s' % output_filename)
                 if ret == 0:
@@ -826,12 +824,12 @@ def download_urls(urls, title, ext, total_size, output_dir='.', refer=None, merg
 
         elif ext in ['flv', 'f4v']:
             try:
-                from .processor.ffmpeg import has_ffmpeg_installed
+                from processor.ffmpeg import has_ffmpeg_installed
                 if has_ffmpeg_installed():
-                    from .processor.ffmpeg import ffmpeg_concat_flv_to_mp4
+                    from processor.ffmpeg import ffmpeg_concat_flv_to_mp4
                     ffmpeg_concat_flv_to_mp4(parts, output_filepath)
                 else:
-                    from .processor.join_flv import concat_flv
+                    from processor.join_flv import concat_flv
                     concat_flv(parts, output_filepath)
                 print('Merged into %s' % output_filename)
             except:
@@ -842,12 +840,12 @@ def download_urls(urls, title, ext, total_size, output_dir='.', refer=None, merg
 
         elif ext == 'mp4':
             try:
-                from .processor.ffmpeg import has_ffmpeg_installed
+                from processor.ffmpeg import has_ffmpeg_installed
                 if has_ffmpeg_installed():
-                    from .processor.ffmpeg import ffmpeg_concat_mp4_to_mp4
+                    from processor.ffmpeg import ffmpeg_concat_mp4_to_mp4
                     ffmpeg_concat_mp4_to_mp4(parts, output_filepath)
                 else:
-                    from .processor.join_mp4 import concat_mp4
+                    from processor.join_mp4 import concat_mp4
                     concat_mp4(parts, output_filepath)
                 print('Merged into %s' % output_filename)
             except:
@@ -858,12 +856,12 @@ def download_urls(urls, title, ext, total_size, output_dir='.', refer=None, merg
 
         elif ext == "ts":
             try:
-                from .processor.ffmpeg import has_ffmpeg_installed
+                from processor.ffmpeg import has_ffmpeg_installed
                 if has_ffmpeg_installed():
-                    from .processor.ffmpeg import ffmpeg_concat_ts_to_mkv
+                    from processor.ffmpeg import ffmpeg_concat_ts_to_mkv
                     ffmpeg_concat_ts_to_mkv(parts, output_filepath)
                 else:
-                    from .processor.join_ts import concat_ts
+                    from processor.join_ts import concat_ts
                     concat_ts(parts, output_filepath)
                 print('Merged into %s' % output_filename)
             except:
@@ -913,9 +911,9 @@ def download_urls_chunked(urls, title, ext, total_size, output_dir='.', refer=No
             print()
             return
         if ext == 'ts':
-            from .processor.ffmpeg import has_ffmpeg_installed
+            from processor.ffmpeg import has_ffmpeg_installed
             if has_ffmpeg_installed():
-                from .processor.ffmpeg import ffmpeg_convert_ts_to_mkv
+                from processor.ffmpeg import ffmpeg_convert_ts_to_mkv
                 if ffmpeg_convert_ts_to_mkv(parts, os.path.join(output_dir, title + '.mkv')):
                     for part in parts:
                         os.remove(part)
@@ -941,9 +939,9 @@ def download_urls_chunked(urls, title, ext, total_size, output_dir='.', refer=No
             print()
             return
         if ext == 'ts':
-            from .processor.ffmpeg import has_ffmpeg_installed
+            from processor.ffmpeg import has_ffmpeg_installed
             if has_ffmpeg_installed():
-                from .processor.ffmpeg import ffmpeg_concat_ts_to_mkv
+                from processor.ffmpeg import ffmpeg_concat_ts_to_mkv
                 if ffmpeg_concat_ts_to_mkv(parts, os.path.join(output_dir, title + '.mkv')):
                     for part in parts:
                         os.remove(part)
@@ -965,11 +963,11 @@ def download_rtmp_url(url,title, ext,params={}, total_size=0, output_dir='.', re
         return
 
     if player:
-        from .processor.rtmpdump import play_rtmpdump_stream
+        from processor.rtmpdump import play_rtmpdump_stream
         play_rtmpdump_stream(player, url, params)
         return
 
-    from .processor.rtmpdump import has_rtmpdump_installed, download_rtmpdump_stream
+    from processor.rtmpdump import has_rtmpdump_installed, download_rtmpdump_stream
     assert has_rtmpdump_installed(), "RTMPDump not installed."
     download_rtmpdump_stream(url,  title, ext,params, output_dir)
 
@@ -985,7 +983,7 @@ def download_url_ffmpeg(url,title, ext,params={}, total_size=0, output_dir='.', 
         launch_player(player, [url])
         return
 
-    from .processor.ffmpeg import has_ffmpeg_installed, ffmpeg_download_stream
+    from processor.ffmpeg import has_ffmpeg_installed, ffmpeg_download_stream
     assert has_ffmpeg_installed(), "FFmpeg not installed."
 
     global output_filename

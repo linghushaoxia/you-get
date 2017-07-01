@@ -3,13 +3,15 @@
 
 __all__ = ['netease_download']
 
-from ..common import *
-from ..common import print_more_compatible as print
-from ..util import fs
-from json import loads
-import hashlib
 import base64
+import hashlib
+from json import loads
 import os
+
+from common import *
+from common import print_more_compatible as print
+from util import fs
+
 
 def netease_hymn():
     return """

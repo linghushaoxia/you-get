@@ -2,10 +2,12 @@
 
 __all__ = ['yixia_download']
 
-from ..common import *
-from urllib.parse import urlparse
 from json import loads
 import re
+from urllib.parse import urlparse
+
+from common import *
+
 
 #----------------------------------------------------------------------
 def yixia_miaopai_download_by_scid(scid, output_dir = '.', merge = True, info_only = False):

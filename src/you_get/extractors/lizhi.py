@@ -2,7 +2,9 @@
 
 __all__ = ['lizhi_download']
 import json
-from ..common import *
+
+from common import *
+
 
 # radio_id: e.g. 549759 from http://www.lizhi.fm/549759/
 #

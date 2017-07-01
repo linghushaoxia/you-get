@@ -3,8 +3,10 @@
 import logging
 import os.path
 import subprocess
-from ..util.strings import parameterize
-from ..common import print_more_compatible as print
+
+from common import print_more_compatible as print
+from util.strings import parameterize
+
 
 try:
     from subprocess import DEVNULL

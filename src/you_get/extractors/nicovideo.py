@@ -2,7 +2,8 @@
 
 __all__ = ['nicovideo_download']
 
-from ..common import *
+from common import *
+
 
 def nicovideo_login(user, password):
     data = "current_form=login&mail=" + user +"&password=" + password + "&login_submit=Log+In"
@@ -12,7 +13,7 @@ def nicovideo_login(user, password):
 def nicovideo_download(url, output_dir='.', merge=True, info_only=False, **kwargs):
     import ssl
     ssl_context = request.HTTPSHandler(
-context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+context=ssl.SSLContext(ssl.PROTOCOL_SSLv23))
     cookie_handler = request.HTTPCookieProcessor()
     opener = request.build_opener(ssl_context, cookie_handler)
     request.install_opener(opener)

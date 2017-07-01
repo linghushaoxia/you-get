@@ -2,7 +2,8 @@
 
 __all__ = ['iqilu_download']
 
-from ..common import *
+from common import *
+
 
 def iqilu_download(url, output_dir = '.', merge = False, info_only = False, **kwargs):
     ''''''

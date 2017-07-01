@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from ..common import *
-from ..extractor import VideoExtractor
-
 from json import loads
+
+from common import *
+from extractor import VideoExtractor
+
 
 class QiE(VideoExtractor):
     name = "QiE （企鹅直播）"

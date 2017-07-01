@@ -2,15 +2,15 @@
 
 __all__ = ['acfun_download']
 
-from ..common import *
+import json, re
 
+from common import *
 from .le import letvcloud_download_by_vu
 from .qq import qq_download_by_vid
 from .sina import sina_download_by_vid
 from .tudou import tudou_download_by_iid
 from .youku import youku_download_by_vid, youku_open_download_by_vid
 
-import json, re
 
 def get_srt_json(id):
     url = 'http://danmu.aixifan.com/V2/%s' % id

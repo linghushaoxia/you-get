@@ -2,9 +2,11 @@
 
 __all__ = ['funshion_download']
 
-from ..common import *
-import urllib.error
 import json
+import urllib.error
+
+from common import *
+
 
 #----------------------------------------------------------------------
 def funshion_download(url, output_dir = '.', merge = False, info_only = False, **kwargs):

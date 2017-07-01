@@ -2,7 +2,8 @@
 
 __all__ = ['mixcloud_download']
 
-from ..common import *
+from common import *
+
 
 def mixcloud_download(url, output_dir='.', merge=True, info_only=False, **kwargs):
     html = get_html(url, faker=True)

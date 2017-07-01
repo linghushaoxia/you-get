@@ -2,13 +2,15 @@
 
 __all__ = ['videomega_download']
 
-from ..common import *
 import ssl
+
+from common import *
+
 
 def videomega_download(url, output_dir='.', merge=True, info_only=False, **kwargs):
     # Hot-plug cookie handler
     ssl_context = request.HTTPSHandler(
-        context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+        context=ssl.SSLContext(ssl.PROTOCOL_SSLv23))
     cookie_handler = request.HTTPCookieProcessor()
     opener = request.build_opener(ssl_context, cookie_handler)
     opener.addheaders = [('Referer', url),

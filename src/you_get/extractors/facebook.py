@@ -2,8 +2,10 @@
 
 __all__ = ['facebook_download']
 
-from ..common import *
 import json
+
+from common import *
+
 
 def facebook_download(url, output_dir='.', merge=True, info_only=False, **kwargs):
     html = get_html(url)

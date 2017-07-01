@@ -2,7 +2,7 @@
 
 __all__ = ['huomaotv_download']
 
-from ..common import *
+from common import *
 
 
 def get_mobile_room_url(room_id):

@@ -2,7 +2,8 @@
 
 __all__ = ['dailymotion_download']
 
-from ..common import *
+from common import *
+
 
 def extract_m3u(url):
     content = get_content(url)

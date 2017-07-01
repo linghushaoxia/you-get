@@ -2,7 +2,8 @@
 
 __all__ = ['ehow_download']
 
-from ..common import *
+from common import *
+
 
 def ehow_download(url, output_dir = '.', merge = True, info_only = False, **kwargs):
 	

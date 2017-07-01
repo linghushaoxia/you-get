@@ -1,15 +1,17 @@
 #!/usr/bin/env python
-from ..common import *
-from urllib import parse
-import random
-from time import sleep
-import xml.etree.ElementTree as ET
+import base64
 import datetime
 import hashlib
-import base64
 import logging
-from urllib import error
+import random
 import re
+from time import sleep
+from urllib import error
+from urllib import parse
+
+from common import *
+import xml.etree.ElementTree as ET
+
 
 __all__ = ['icourses_download']
 

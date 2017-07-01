@@ -3,10 +3,11 @@
 
 __all__ = ['xiami_download']
 
-from ..common import *
-
-from xml.dom.minidom import parseString
 from urllib import parse
+from xml.dom.minidom import parseString
+
+from common import *
+
 
 def location_dec(str):
     head = int(str[0])

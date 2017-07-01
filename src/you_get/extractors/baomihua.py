@@ -2,9 +2,10 @@
 
 __all__ = ['baomihua_download', 'baomihua_download_by_id']
 
-from ..common import *
-
 import urllib
+
+from common import *
+
 
 def baomihua_download_by_id(id, title=None, output_dir='.', merge=True, info_only=False, **kwargs):
     html = get_html('http://play.baomihua.com/getvideourl.aspx?flvid=%s&devicetype=phone_app' % id)

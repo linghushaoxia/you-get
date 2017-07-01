@@ -2,10 +2,10 @@
 
 __all__ = ['cntv_download', 'cntv_download_by_id']
 
-from ..common import *
-
 import json
 import re
+
+from common import *
 
 
 def cntv_download_by_id(id, title = None, output_dir = '.', merge = True, info_only = False):

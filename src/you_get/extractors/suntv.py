@@ -2,9 +2,11 @@
 
 __all__ = ['suntv_download']
 
-from ..common import *
-import urllib
 import re
+import urllib
+
+from common import *
+
 
 def suntv_download(url, output_dir = '.', merge = True, info_only = False, **kwargs):
     if re.match(r'http://www.isuntv.com/\w+', url):

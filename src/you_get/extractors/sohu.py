@@ -2,18 +2,19 @@
 
 __all__ = ['sohu_download']
 
-from ..common import *
-
-import json
-import time
-from random import random
-from urllib.parse import urlparse
-
 '''
 Changelog:
     1. http://tv.sohu.com/upload/swf/20150604/Main.swf
         new api
 '''
+
+import json
+from random import random
+import time
+from urllib.parse import urlparse
+
+from common import *
+
 
 def real_url(host,vid,tvid,new,clipURL,ck):
     url = 'http://'+host+'/?prot=9&prod=flash&pt=1&file='+clipURL+'&new='+new +'&key='+ ck+'&vid='+str(vid)+'&uid='+str(int(time.time()*1000))+'&t='+str(random())+'&rb=1'

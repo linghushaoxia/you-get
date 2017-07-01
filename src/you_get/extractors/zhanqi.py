@@ -2,8 +2,10 @@
 
 __all__ = ['zhanqi_download']
 
-from ..common import *
 import json
+
+from common import *
+
 
 def zhanqi_download(url, output_dir = '.', merge = True, info_only = False, **kwargs):
     host_name = url.split('/')[2]

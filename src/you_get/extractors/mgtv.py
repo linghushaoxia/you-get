@@ -1,14 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from ..common import *
-from ..extractor import VideoExtractor
-
 from json import loads
-from urllib.parse import urlsplit
 from os.path import dirname
 import re
 
+from common import *
+from extractor import VideoExtractor
+#from urlparse import urlsplit
+
+
+from urllib.parse import urlsplit
+#import urlparse.urlsplit;
 class MGTV(VideoExtractor):
     name = "芒果 (MGTV)"
 
@@ -39,7 +42,7 @@ class MGTV(VideoExtractor):
         Give you the real URLs."""
         content = loads(get_content(url))
         m3u_url = content['info']
-        split = urlsplit(m3u_url)
+        split =  urlsplit(m3u_url)
         
         base_url = "{scheme}://{netloc}{path}/".format(scheme = split[0],
                                                       netloc = split[1],
@@ -84,21 +87,21 @@ class MGTV(VideoExtractor):
                 for i in segment_list_this:
                     stream_fileid_list.append(os.path.basename(i).split('.')[0])
 
-            #make pieces
-            pieces = []
-            for i in zip(stream_fileid_list, segment_list_this):
-                pieces.append({'fileid': i[0], 'segs': i[1],})
-
-                self.streams[quality_id] = {
-                        'container': s['container'],
-                        'video_profile': s['video_profile'],
-                        'size': m3u8_size,
-                        'pieces': pieces,
-                        'm3u8_url': m3u8_url
-                    }
-
-            if not kwargs['info_only']:
-                self.streams[quality_id]['src'] = segment_list_this
+                #make pieces
+                pieces = []
+                for i in zip(stream_fileid_list, segment_list_this):
+                    pieces.append({'fileid': i[0], 'segs': i[1],})
+    
+                    self.streams[quality_id] = {
+                            'container': s['container'],
+                            'video_profile': s['video_profile'],
+                            'size': m3u8_size,
+                            'pieces': pieces,
+                            'm3u8_url': m3u8_url
+                        }
+    
+                if not kwargs['info_only']:
+                    self.streams[quality_id]['src'] = segment_list_this
 
     def extract(self, **kwargs):
         if 'stream_id' in kwargs and kwargs['stream_id']:
@@ -149,7 +152,7 @@ class MGTV(VideoExtractor):
                 download_urls(stream_info['src'], self.title, stream_info['container'], stream_info['size'],
                               output_dir=kwargs['output_dir'],
                               merge=kwargs.get('merge', True))
-                              # av=stream_id in self.dash_streams)
+# av=stream_id in self.dash_streams)
 
 site = MGTV()
 download = site.download_by_url

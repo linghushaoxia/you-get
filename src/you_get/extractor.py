@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
-from .common import match1, maybe_print, download_urls, get_filename, parse_host, set_proxy, unset_proxy
-from .common import print_more_compatible as print
-from .util import log
-from . import json_output
 import os
+
+from common import match1, maybe_print, download_urls, get_filename, parse_host, set_proxy, unset_proxy
+from common import print_more_compatible as printMC
+import json_output
+from util import log
+
 
 class Extractor():
     def __init__(self, *args):
@@ -85,28 +87,28 @@ class VideoExtractor():
             stream = self.dash_streams[stream_id]
 
         if 'itag' in stream:
-            print("    - itag:          %s" % log.sprint(stream_id, log.NEGATIVE))
+            printMC("    - itag:          %s" % log.sprint(stream_id, log.NEGATIVE))
         else:
-            print("    - format:        %s" % log.sprint(stream_id, log.NEGATIVE))
+            printMC( "- format:        %s" % log.sprint(stream_id, log.NEGATIVE))
 
         if 'container' in stream:
-            print("      container:     %s" % stream['container'])
+            printMC("      container:     %s" % stream['container'])
 
         if 'video_profile' in stream:
             maybe_print("      video-profile: %s" % stream['video_profile'])
 
         if 'quality' in stream:
-            print("      quality:       %s" % stream['quality'])
+            printMC("      quality:       %s" % stream['quality'])
 
         if 'size' in stream and stream['container'].lower() != 'm3u8':
-            print("      size:          %s MiB (%s bytes)" % (round(stream['size'] / 1048576, 1), stream['size']))
+            printMC("      size:          %s MiB (%s bytes)" % (round(stream['size'] / 1048576, 1), stream['size']))
 
         if 'itag' in stream:
-            print("    # download-with: %s" % log.sprint("you-get --itag=%s [URL]" % stream_id, log.UNDERLINE))
+            printMC("    # download-with: %s" % log.sprint("you-get --itag=%s [URL]" % stream_id, log.UNDERLINE))
         else:
-            print("    # download-with: %s" % log.sprint("you-get --format=%s [URL]" % stream_id, log.UNDERLINE))
+            printMC("    # download-with: %s" % log.sprint("you-get --format=%s [URL]" % stream_id, log.UNDERLINE))
 
-        print()
+        printMC()
 
     def p_i(self, stream_id):
         if stream_id in self.streams:
@@ -115,48 +117,48 @@ class VideoExtractor():
             stream = self.dash_streams[stream_id]
 
         maybe_print("    - title:         %s" % self.title)
-        print("       size:         %s MiB (%s bytes)" % (round(stream['size'] / 1048576, 1), stream['size']))
-        print("        url:         %s" % self.url)
-        print()
+        printMC("       size:         %s MiB (%s bytes)" % (round(stream['size'] / 1048576, 1), stream['size']))
+        printMC("        url:         %s" % self.url)
+        printMC()
 
     def p(self, stream_id=None):
         maybe_print("site:                %s" % self.__class__.name)
         maybe_print("title:               %s" % self.title)
         if stream_id:
             # Print the stream
-            print("stream:")
+            printMC("stream:")
             self.p_stream(stream_id)
 
         elif stream_id is None:
             # Print stream with best quality
-            print("stream:              # Best quality")
+            printMC("stream:              # Best quality")
             stream_id = self.streams_sorted[0]['id'] if 'id' in self.streams_sorted[0] else self.streams_sorted[0]['itag']
             self.p_stream(stream_id)
 
         elif stream_id == []:
-            print("streams:             # Available quality and codecs")
+            printMC("streams:             # Available quality and codecs")
             # Print DASH streams
             if self.dash_streams:
-                print("    [ DASH ] %s" % ('_' * 36))
+                printMC("    [ DASH ] %s" % ('_' * 36))
                 itags = sorted(self.dash_streams,
                                key=lambda i: -self.dash_streams[i]['size'])
                 for stream in itags:
                     self.p_stream(stream)
             # Print all other available streams
-            print("    [ DEFAULT ] %s" % ('_' * 33))
+            printMC("    [ DEFAULT ] %s" % ('_' * 33))
             for stream in self.streams_sorted:
                 self.p_stream(stream['id'] if 'id' in stream else stream['itag'])
 
         if self.audiolang:
-            print("audio-languages:")
+            printMC("audio-languages:")
             for i in self.audiolang:
-                print("    - lang:          {}".format(i['lang']))
-                print("      download-url:  {}\n".format(i['url']))
+                printMC("    - lang:          {}".format(i['lang']))
+                printMC("      download-url:  {}\n".format(i['url']))
 
     def p_playlist(self, stream_id=None):
         maybe_print("site:                %s" % self.__class__.name)
-        print("playlist:            %s" % self.title)
-        print("videos:")
+        printMC("playlist:            %s" % self.title)
+        printMC("videos:")
 
     def download(self, **kwargs):
         if 'json_output' in kwargs and kwargs['json_output']:
@@ -207,16 +209,16 @@ class VideoExtractor():
                           merge=kwargs['merge'],
                           av=stream_id in self.dash_streams)
             if 'caption' not in kwargs or not kwargs['caption']:
-                print('Skipping captions.')
+                printMC('Skipping captions.')
                 return
             for lang in self.caption_tracks:
                 filename = '%s.%s.srt' % (get_filename(self.title), lang)
-                print('Saving %s ... ' % filename, end="", flush=True)
+                printMC('Saving %s ... ' % filename, end="", flush=True)
                 srt = self.caption_tracks[lang]
                 with open(os.path.join(kwargs['output_dir'], filename),
                           'w', encoding='utf-8') as x:
                     x.write(srt)
-                print('Done.')
+                printMC('Done.')
 
             # For main_dev()
             #download_urls(urls, self.title, self.streams[stream_id]['container'], self.streams[stream_id]['size'])

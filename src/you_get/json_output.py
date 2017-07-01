@@ -1,6 +1,7 @@
 
 import json
 
+
 # save info from common.print_info()
 last_info = None
 

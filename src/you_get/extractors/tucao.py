@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 
 __all__ = ['tucao_download']
-from ..common import *
-# import re
 import random
 import time
 from xml.dom import minidom
+
+from common import *
+
+
+# import re
 #possible raw list types
 #1. <li>type=tudou&vid=199687639</li>
 #2. <li>type=tudou&vid=199506910|</li>
@@ -15,7 +18,6 @@ from xml.dom import minidom
 #6. <li>vid=49454694&type=sina|</li>
 #7. <li>type=189&vid=513031813243909|</li>
 # re_pattern=re.compile(r"(type=(.+?)&(vid|file)=(.*?))[\|<]")
-
 def tucao_single_download(type_link, title, output_dir=".", merge=True, info_only=False):
     if "file" in type_link:
         url=type_link[type_link.find("file=")+5:]

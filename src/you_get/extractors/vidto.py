@@ -2,9 +2,10 @@
 
 __all__ = ['vidto_download']
 
-from ..common import *
 import pdb
 import time
+
+from common import *
 
 
 def vidto_download(url, output_dir='.', merge=True, info_only=False, **kwargs):

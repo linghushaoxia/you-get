@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-import struct
 from io import BytesIO
+import struct
+
 
 TAG_TYPE_METADATA = 18
 

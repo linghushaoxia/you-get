@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-from ..common import *
-from ..extractor import VideoExtractor
-
 import ssl
+
+from common import *
+from extractor import VideoExtractor
+
 
 class Infoq(VideoExtractor):
     name = "InfoQ"
@@ -30,7 +31,7 @@ class Infoq(VideoExtractor):
 
         # cookie handler
         ssl_context = request.HTTPSHandler(
-            context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+            context=ssl.SSLContext(ssl.PROTOCOL_SSLv23))
         cookie_handler = request.HTTPCookieProcessor()
         opener = request.build_opener(ssl_context, cookie_handler)
         opener.addheaders = [

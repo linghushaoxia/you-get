@@ -1,19 +1,5 @@
 #!/usr/bin/env python
 
-from ..common import *
-from ..common import print_more_compatible as print
-from ..extractor import VideoExtractor
-from ..util import log
-from .. import json_output
-
-from uuid import uuid4
-from random import random,randint
-import json
-from math import floor
-from zlib import decompress
-import hashlib
-import time
-
 '''
 Changelog:
 -> http://www.iqiyi.com/common/flashplayer/20150916/MainPlayer_5_2_28_c3_3_7_4.swf
@@ -35,7 +21,6 @@ Changelog:
     some small changes in Zombie.bite function
 
 '''
-
 '''
 com.qiyi.player.core.model.def.DefinitonEnum
 bid meaning for quality
@@ -82,6 +67,22 @@ def getDispathKey(rid):
     t=str(int(floor(int(time)/(10*60.0))))
     return hashlib.new("md5",bytes(t+tp+rid,"utf-8")).hexdigest()
 '''
+
+import hashlib
+import json
+from math import floor
+from random import random, randint
+import time
+from uuid import uuid4
+from zlib import decompress
+
+from common import *
+from common import print_more_compatible as print
+from extractor import VideoExtractor
+from util import log
+
+
+#from json_output import json_output
 def getVMS(tvid, vid):
     t = int(time.time() * 1000)
     src = '76f90cbd92f94a2e925d83e8ccd22cb7'

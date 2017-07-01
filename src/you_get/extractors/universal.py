@@ -2,8 +2,9 @@
 
 __all__ = ['universal_download']
 
-from ..common import *
+from common import *
 from .embed import *
+
 
 def universal_download(url, output_dir='.', merge=True, info_only=False, **kwargs):
     try:

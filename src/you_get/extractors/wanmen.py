@@ -2,9 +2,10 @@
 
 __all__ = ['wanmen_download', 'wanmen_download_by_course', 'wanmen_download_by_course_topic', 'wanmen_download_by_course_topic_part']
 
-from ..common import *
-from .bokecc import bokecc_download_by_id
 from json import loads
+
+from .bokecc import bokecc_download_by_id
+from common import *
 
 
 ##Helper functions

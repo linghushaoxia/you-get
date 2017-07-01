@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from ..common import *
-from ..extractor import VideoExtractor
-
 import base64
 import ssl
 import time
 import traceback
+
+from common import *
+from extractor import VideoExtractor
+
 
 class Youku(VideoExtractor):
     name = "优酷 (Youku)"
@@ -30,7 +31,7 @@ class Youku(VideoExtractor):
 
     ctype = 12  #differ from 86
 
-    def trans_e(a, c):
+    def trans_e(self,a, c):
         """str, str->str
         This is an RC4 encryption."""
         f = h = 0
@@ -63,10 +64,10 @@ class Youku(VideoExtractor):
         return ep
 
     # Obsolete -- used to parse m3u8 on pl.youku.com
-    def parse_m3u8(m3u8):
+    def parse_m3u8(self,m3u8):
         return re.findall(r'(http://[^?]+)\?ts_start=0', m3u8)
 
-    def oset(xs):
+    def oset(self,xs):
         """Turns a list into an ordered set. (removes duplicates)"""
         mem = set()
         for x in xs:
@@ -74,7 +75,7 @@ class Youku(VideoExtractor):
                 mem.add(x)
         return mem
 
-    def get_vid_from_url(url):
+    def get_vid_from_url(self,url):
         """Extracts video ID from URL.
         """
         return match1(url, r'youku\.com/v_show/id_([a-zA-Z0-9=]+)') or \
@@ -82,7 +83,7 @@ class Youku(VideoExtractor):
           match1(url, r'loader\.swf\?VideoIDS=([a-zA-Z0-9=]+)') or \
           match1(url, r'player\.youku\.com/embed/([a-zA-Z0-9=]+)')
 
-    def get_playlist_id_from_url(url):
+    def get_playlist_id_from_url(self,url):
         """Extracts playlist ID from URL.
         """
         return match1(url, r'youku\.com/albumlist/show\?id=([a-zA-Z0-9=]+)')
@@ -129,7 +130,7 @@ class Youku(VideoExtractor):
     def prepare(self, **kwargs):
         # Hot-plug cookie handler
         ssl_context = request.HTTPSHandler(
-            context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+            context=ssl.SSLContext(ssl.PROTOCOL_SSLv23))
         cookie_handler = request.HTTPCookieProcessor()
         if 'extractor_proxy' in kwargs and kwargs['extractor_proxy']:
             proxy = parse_host(kwargs['extractor_proxy'])

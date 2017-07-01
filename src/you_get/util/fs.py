@@ -2,6 +2,7 @@
 
 import platform
 
+
 def legitimize(text, os=platform.system()):
     """Converts a string to a valid filename.
     """

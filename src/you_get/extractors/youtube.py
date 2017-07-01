@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from ..common import *
-from ..extractor import VideoExtractor
+from common import *
+from extractor import VideoExtractor
 
 from xml.dom.minidom import parseString
 
@@ -36,7 +36,7 @@ class YouTube(VideoExtractor):
         {'itag': '17', 'container': '3GP', 'video_resolution': '144p', 'video_encoding': 'MPEG-4 Visual', 'video_profile': 'Simple', 'video_bitrate': '0.05', 'audio_encoding': 'AAC', 'audio_bitrate': '24'},
     ]
 
-    def decipher(js, s):
+    def decipher(self,js, s):
         def tr_js(code):
             code = re.sub(r'function', r'def', code)
             code = re.sub(r'(\W)(as|if|in|is|or)\(', r'\1_\2(', code)
@@ -77,10 +77,10 @@ class YouTube(VideoExtractor):
         exec(code, globals(), locals())
         return locals()['sig']
 
-    def get_url_from_vid(vid):
+    def get_url_from_vid(self,vid):
         return 'https://youtu.be/{}'.format(vid)
 
-    def get_vid_from_url(url):
+    def get_vid_from_url(self,url):
         """Extracts video ID from URL.
         """
         return match1(url, r'youtu\.be/([^/]+)') or \
@@ -90,7 +90,7 @@ class YouTube(VideoExtractor):
           parse_query_param(url, 'v') or \
           parse_query_param(parse_query_param(url, 'u'), 'v')
 
-    def get_playlist_id_from_url(url):
+    def get_playlist_id_from_url(self,url):
         """Extracts playlist ID from URL.
         """
         return parse_query_param(url, 'list') or \

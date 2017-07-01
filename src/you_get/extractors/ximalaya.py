@@ -2,10 +2,11 @@
 
 __all__ = ['ximalaya_download_playlist', 'ximalaya_download', 'ximalaya_download_by_id']
 
-from ..common import *
-
 import json
 import re
+
+from common import *
+
 
 stream_types = [
         {'itag': '1', 'container': 'm4a', 'bitrate': 'default'},

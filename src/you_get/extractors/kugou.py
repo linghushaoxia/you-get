@@ -2,11 +2,13 @@
 
 __all__ = ['kugou_download']
 
-from ..common import *
-from json import loads
 from base64 import b64decode
-import re
 import hashlib
+from json import loads
+import re
+
+from common import *
+
 
 def kugou_download(url, output_dir=".", merge=True, info_only=False, **kwargs):
     if url.lower().find("5sing")!=-1:

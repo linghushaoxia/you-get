@@ -2,12 +2,13 @@
 
 __all__ = ['letv_download', 'letvcloud_download', 'letvcloud_download_by_vu']
 
+import base64, hashlib, urllib, time, re
 import json
 import random
-import xml.etree.ElementTree as ET
-import base64, hashlib, urllib, time, re
 
-from ..common import *
+from common import *
+import xml.etree.ElementTree as ET
+
 
 #@DEPRECATED
 def get_timestamp():

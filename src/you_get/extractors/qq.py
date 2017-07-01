@@ -2,9 +2,11 @@
 
 __all__ = ['qq_download']
 
-from ..common import *
+from urllib.parse import urlparse, parse_qs
+
+from common import *
 from .qie import download as qieDownload
-from urllib.parse import urlparse,parse_qs
+
 
 def qq_download_by_vid(vid, title, output_dir='.', merge=True, info_only=False):
     info_api = 'http://vv.video.qq.com/getinfo?otype=json&appver=3%2E2%2E19%2E333&platform=11&defnpayver=1&vid=' + vid

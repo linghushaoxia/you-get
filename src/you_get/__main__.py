@@ -4,8 +4,10 @@ import getopt
 import os
 import platform
 import sys
-from .version import script_name, __version__
-from .util import git, log
+
+from util import git, log
+from version import script_name, __version__
+
 
 _options = [
     'help',
@@ -41,7 +43,7 @@ def main_dev(**kwargs):
         # Display help.
         print(_help)
         # Enter GUI mode.
-        #from .gui import gui_main
+        #from gui import gui_main
         #gui_main()
     else:
         conf = {}
@@ -74,21 +76,21 @@ def main_dev(**kwargs):
                 # Download playlist whenever possible.
                 conf['playlist'] = True
 
-        if args:
-            if 'gui' in conf and conf['gui']:
-                # Enter GUI mode.
-                from .gui import gui_main
-                gui_main(*args, **conf)
-            else:
-                # Enter console mode.
-                from .console import console_main
-                console_main(*args, **conf)
+#         if args:
+#             if 'gui' in conf and conf['gui']:
+#                 # Enter GUI mode.
+#                 from gui import gui_main
+#                 gui_main(*args, **conf)
+#             else:
+#                 # Enter console mode.
+#                 from console import console_main
+#                 console_main(*args, **conf)
 
 def main(**kwargs):
     """Main entry point.
     you-get (legacy)
     """
-    from .common import main
+    from common import main
     main(**kwargs)
 
 if __name__ == '__main__':

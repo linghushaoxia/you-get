@@ -2,18 +2,20 @@
 
 __all__ = ['ucas_download', 'ucas_download_single', 'ucas_download_playlist']
 
-from ..common import *
-import urllib.error
-import http.client
-from time import time
-from random import random
-import xml.etree.ElementTree as ET
-from copy import copy
-
 """
 Do not replace http.client with get_content
 for UCAS's server is not correctly returning data!
 """
+
+from copy import copy
+import http.client
+from random import random
+from time import time
+import urllib.error
+
+from common import *
+import xml.etree.ElementTree as ET
+
 
 def dictify(r,root=True):
     """http://stackoverflow.com/a/30923963/2946714"""
@@ -40,7 +42,6 @@ def _get_video_query_url(resourceID):
         'Connection': 'keep-alive',
     }
     conn = http.client.HTTPConnection("210.76.211.10")
-    
     conn.request("GET", "/vplus/remote.do?method=query2&loginname=videocas&pwd=af1c7a4c5f77f790722f7cae474c37e281203765d423a23b&resource=%5B%7B%22resourceID%22%3A%22" + resourceID + "%22%2C%22on%22%3A1%2C%22time%22%3A600%2C%22eid%22%3A100%2C%22w%22%3A800%2C%22h%22%3A600%7D%5D&timeStamp=" + str(int(time())), headers=headers)
     res = conn.getresponse()
     data = res.read()

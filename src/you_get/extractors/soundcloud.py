@@ -2,7 +2,8 @@
 
 __all__ = ['soundcloud_download', 'soundcloud_download_by_id']
 
-from ..common import *
+from common import *
+
 
 def soundcloud_download_by_id(id, title = None, output_dir = '.', merge = True, info_only = False):
     assert title

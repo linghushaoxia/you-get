@@ -2,8 +2,9 @@
 
 __all__ = ['dilidili_download']
 
-from ..common import *
 from .ckplayer import ckplayer_download
+from common import *
+
 
 headers = {
     'DNT': '1',

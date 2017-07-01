@@ -2,9 +2,11 @@
 
 __all__ = ['quanmin_download']
 
-from ..common import *
 import json
 import time
+
+from common import *
+
 
 def quanmin_download(url, output_dir = '.', merge = True, info_only = False, **kwargs):
     roomid = url[url.rfind("/")+1:]

@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-from ..common import *
-from ..extractor import VideoExtractor
-
 import json
+
+from common import *
+from extractor import VideoExtractor
+
 
 class Bigthink(VideoExtractor):
     name = "Bigthink"

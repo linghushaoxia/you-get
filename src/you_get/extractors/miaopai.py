@@ -2,8 +2,10 @@
 
 __all__ = ['miaopai_download']
 
-from ..common import *
 import urllib.error
+
+from common import *
+
 
 def miaopai_download_by_fid(fid, output_dir = '.', merge = False, info_only = False, **kwargs):
     '''Source: Android mobile'''
